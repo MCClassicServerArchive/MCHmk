@@ -1,0 +1,366 @@
+MCHmk Changelog
+---------------
+See the commit log at https://bitbucket.org/Jjp137/mchmk/changesets 
+for a more detailed look at what exactly has been changed. This file 
+is a non-programmer's guide to what has been changed.
+---------------
+r21 (???):
+- Blocks placed by /place now count towards block spam, preventing
+clients from using /place to get around the anti-grief system.
+
+r20 (2018-04-09):
+- Added /pclients from MCGalaxy. Thanks to UnknownShadow200
+for the pull request.
+- Fixed /cmdbind [num?] not working properly. Thanks to
+UnknownShadow200 for describing the bug.
+- Fixed /unload empty not working properly. This fix was taken
+from MCGalaxy.
+- Fixed an exploit with /banip and /unbanip.
+- Fixed an exploit with /view.
+- Fixed /physics 5 not working correctly recent .NET/Mono versions.
+- Fixed /spin not working on recent .NET/Mono versions.
+- Make it less likely for two or more clients with the same player
+name to successfully connect to the server if the connections
+are performed around the same time.
+- Removed /lockdown and /unlock.
+- Restricted the characters that filenames for various commands,
+such as /save <map?> <name?>, /view, and /retrieve, can use. If you
+are having trouble accessing a file from the server, try renaming
+it to use alphanumeric characters only.
+
+r19 (2016-02-06):
+- Removed ban reasons for now.
+- Removed some annoying messages related to static mode that
+were introduced on accident in r18.
+- Removed the unused rank-super option from server.properties.
+- Removed the repeat-message option from server.properties.
+Message blocks will now always show their messages, even if
+repeatedly activated.
+- Removed the guest-limit-notify, guest-join-notify, and
+guest-leave-notify options from server.properties. Messages
+will always be shown when a guest leaves or joins the server,
+but never if the guest limit is exceeded. The latter case will
+still be noted in the server's log.
+- Fixed a regression from r15 where /fakepay imitated /give.
+- Fixed color codes at the end of titles leaking into the player's
+name. This fix was taken from MCGalaxy.
+- Fixed IRC showing a "player disconnected" message if the player
+disconnecting was hidden. This fix was taken from MCGalaxy.
+- Fixed /copylvl not working properly.
+- Fixed /restore causing an error if the backup being restored to
+was smaller than the current map.
+- Fixed /restore listing the file paths of every backup on Linux.
+- Fixed /search giving no feedback if the category was misspelled.
+- Changed the output of /whois and /whowas.
+
+r18 (2016-01-23):
+- Added /durl back in. This should only be used if minecraft.net
+logins still need to be supported.
+- Added /zombiespawn back in.
+- Removed griefer stones. All griefer_stone blocks will be
+converted to smooth stone blocks. All related settings in
+server.properties have been removed.
+- Removed plugin support and custom commands.
+- Removed WoM-related features.
+- Removed $serverip.
+- Removed the log-heartbeat option from server.properties.
+- Removed /lowlag.
+- Fixed an issue that generated physics errors on Mono 4.x.
+- Fixed total bans (/ban @name) not working from the console.
+- Fixed a regression from r15 where $name did not work.
+- Fixed a regression from r17 where no one can log in if the
+whitelist was disabled.
+- Fixed a regression from r17 where /retrieve didn't work
+for any copies stored when using r17.
+- Fixed a bug with /ascend not working properly with
+levels of different dimensions.
+- Fixed a bug with active liquids destroying CPE blocks when
+the map's physics setting is 2 to 4.
+- Fixed a bug where the number of blocks a player modified was
+being counted incorrectly. This fix was taken from MCGalaxy.
+- Fixed /ellipse being missing from r15 onwards.
+- Fixed /explode creating an explosion on the wrong level if
+the target player is in a different level. Thanks to
+UnknownShadow200 for pointing towards this bug.
+- Fixed some commands never appearing in /search results.
+- Fixed some commands appearing twice in /search results.
+- Fixed /voteresults not being displayed in /help.
+- Fixed /redo not working. Thanks to UnknownShadow200 for sharing
+information about the cause on IRC.
+- Changed /line. The wall and straight parameters can be provided
+together now. The text for /help line has also been improved.
+- Changed /measure [*block*]. Instead of not counting blocks of
+that type, it only counts blocks of the given type, if specified.
+- /pyramid now uses the currently held block instead of stone
+if no block is specified.
+- Changed /pyramid reverse. It is no longer hollow.
+- /shutdown now accepts 0 as the seconds parameter.
+Thanks to LegoBricker for implementing this.
+- Changed /splace. It now uses the currently held block.
+- Changed /tcolor. Its syntax is the same as /color now.
+- Changed /weather. The forecast parameter is now required.
+Thanks to LegoBricker for working on this.
+- Changed the "Someone logged in as you!" message.
+
+r17 (2015-02-03):
+This version of MCHmk adds support for Minecraft's uuids. However,
+before you update to this version, you must run the ChangeToUUID
+program that is also on the download page in order to convert
+your data to support this change. If you do not do this, errors
+will definitely occur. All admin passwords will be reset during
+the conversion process as well.
+--
+Here is the usual set of changes:
+- Removed support for e-mail logins.
+- Removed custom login and logout messages.
+- Removed the premium-only option from server.properties.
+- Fixed a regression from r15 where /resetpass didn't work.
+- Fixed SQLite not working on Macs. Credit to LegoBricker
+for helping me resolve this issue.
+
+r16 (2015-01-20):
+- Fixed a regression introduced in r15 where muted players who
+leave the server were not being muted again when they rejoin.
+- Fixed a regression introduced in r15 where /museum did not work
+for levels in .lvl format.
+- The CPE fire block is now bound to /fire. The old "fire" block
+is renamed to /embers. You will need to adjust the rank of the
+fire block accordingly.
+- Similarly, the CPE magma block is now bound to /magma. The
+old "magma" block is renamed to /active_magma. You will need to
+adjust the rank of the magma block accordingly.
+- Fixed "no longer AFK" messages sometimes not appearing in IRC.
+- /server was removed temporarily.
+- /restart was removed.
+- The restart-on-error option in server.properties was removed.
+- /write underwent internal improvements. Thanks to LegoBricker
+for working on this task.
+
+r15 (2015-01-08):
+This version of MCHmk is based on a recent build of MCForge 6+,
+and thus, many of the changes come from MCForge, including:
+- Preliminary support for ClassiCube extensions, including
+custom blocks.
+- Support for the ClassiCube heartbeat.
+- Removal of the WoM heartbeat.
+- Added the /weather and /model commands. These only work if
+you are using ClassiCube or any other client that supports
+the CPE protocol.
+- A new level format that supports a greater variety of blocks
+is implemented. These levels are saved with the .mcf extension.
+- /unloaded now displays the perbuild color of each level,
+and it lets players know what levels they can visit.
+- /review has been changed.
+---------
+There are also several bugfixes and changes from r14:
+- MCHmk should more reliably work with newer versions of Mono now.
+- Level data is now properly saved when the server shuts down.
+- Reverted the default rank of /delete to advbuilder.
+- If the autoload setting in server.properties is false, the
+list of loaded levels will be preserved when the server shuts
+down, and the server will load those levels when the server
+starts again. This fixes a regression introduced in r2.
+
+r14 (2012-10-29):
+- Fixed a bug where /players did not work from the console
+if a player is hidden.
+- Removed CTF entirely.
+- Changed /devs a little bit.
+
+r13 (2012-09-25):
+- Important bugfix regarding the heartbeat. Please note:
+on systems that use Mono, the command 'mozroots --import
+--sync' must be run before you start the server, or else
+no one will be able to see your server.
+
+r12 (2012-08-27):
+- ConsoleMCHmk.exe should be used to start the server now.
+Delete MCHmk.exe.
+- The bug where /fly did not work if any of the player's
+coordinates was 0 was fixed. In other words, /fly now works
+if you are on certain edges of the map and if you are on the
+bottom of the map.
+- Falling deaths have been somewhat fixed.
+- Fixed an exploit involving portals.
+- Fixed an exploit with /store.
+- Fixed an exploit in the admin verification system. However,
+you will need to make all the filenames in extra/passwords/
+lowercase in order for your current passwords to work still.
+(Credit to the MCForge team for this one; it was ported from
+MCForge 5.5.0.3.)
+- Fixed portals checking the pervisit of the wrong map.
+- Fixed a bug where those who had permission to use /pervisitmax
+were sliently not able to visit some maps.
+- Fixed a bug where /maze did not check the player's cuboid limit.
+- /mute now accepts a seconds parameter. Thanks to LegoBricker
+for implementing this.
+- /xmute has been removed as a result of the above change.
+- Removed /copy's ability to load from and save to online
+locations.
+- Other minor fixes.
+
+r11 (2012-07-21):
+- Fixed /resetbot freezing console's input for a few seconds.
+- Properly fixed a client crash exploit with $color.
+
+r10 (2012-07-18):
+- Disabled the use of $color to prevent a client crash exploit.
+This will be properly fixed later.
+
+r9 (2012-07-16):
+- Changed the profanity filter. Basically, it is less greedy
+about filtering at the expense of not catching everything. Also, 
+the bug that replaced all chat with asterisks if badwords.txt 
+had a line with only whitespace was fixed. (There may be a setting
+to tweak how strict the filter is later.)
+- Fixed an issue with the new money limit and MySQL databases that
+would cause /whois data loss.
+
+r8 (2012-07-11):
+- Really fixed /help ranks for real.
+- Fixed /rules [*player*] not working.
+- Fixed TNT not killing players (regression introduced in r3).
+- Removed several obsolete server properties.
+- server.properties is more organized.
+- /levels has changed, and it also works from the console now.
+- /vip creates vips.txt if it doesn't exist now. This should prevent
+the VIP system from not working.
+- Console's chat and command usage is now logged.
+- The correct message now appears when using /kick from the console
+with no reason provided.
+- Prevented two or more instances of /shutdown occurring.
+Thanks to LegoBricker for doing this.
+- ? is supported by /write now, and ; is fixed.
+- /rankinfo works with offline players now, and it is no longer
+case-sensitive.
+- /rankinfo does not report erroneous entries anymore.
+- /players [*rank*] works now. Thanks to LegoBricker for fixing this.
+- /players now shows the nobody rank when one is online. Thanks to
+LegoBricker for adding this.
+- /players now shows any hidden players if the person using
+the command is of equal or greater rank to them. Thanks to
+LegoBricker for adding this.
+- There is now a '/report delete all' thanks to LegoBricker.
+- The server no longer crashes when the IRC bot loses connection.
+However, the IRC bot will not reconnect automatically. Use /resetbot
+to restart the bot. (If someone has a better fix, let me know!)
+- Increased the amount of money a player can have to about 2^31.
+- /fakepay now prints the pay message instead of the give message.
+- The server owner will no longer automatically have the title [Owner]
+if he has no title.
+- /museum with named backups now works.
+- /me actions in IRC are now sent to the server.
+- Fixed opchat/adminchat producing errors if the opchannel is 
+left blank.
+- /map instant is no longer reserved for superop+.
+- Other minor edits.
+
+r7 (2012-06-20):
+- Fixed /khide's IRC messages.
+- Fixed /help ranks incorrectly displaying permission values.
+- Minor /help nitpick fixed.
+- CTF works again, but it's not stable. Use at your own risk.
+
+r6 (2012-06-18):
+- Changed the output of /devs.
+- Removed /baninfo's shortcut since it conflicted with another one.
+- Shortcuts are now displayed with each command when using /help.
+- /help short and /help old have been removed since they filled
+up the whole screen anyways and were therefore unreadable.
+- Removed the following server settings: dollar-before-dollar,
+old-help, check-updates.
+- Added Legobricker's /khide command.
+- Changed most /help messages. Thanks to Legobricker for getting
+started with those.
+- Fixed a bug where /ellipse wasn't being loaded at all.
+- Changed the shortcuts of /loginmessage and /logoutmessage so that
+they don't conflict.
+- If a player is online, /award now accepts the partial name of that
+player. Thanks to LegoBricker for implementing this.
+
+r5 (2012-06-03):
+- Fixed a rare case of usage of color codes crashing all clients.
+- Fixed levels not being saved when being unloaded (regression
+introduced in r2).
+
+r4 (2012-05-28):
+- Really fixed /portal show and /mb show not working. However, it does
+not update until you save or reload the map. In other words, it does not
+update instantly. This will be fixed in the future as well as other quirks.
+
+r3 (2012-05-28):
+- Removed the GUI. The console must be used now!
+- Viewmode.cfg is no longer used. It should be deleted.
+- Removed /playerblock.
+- Removed chatrooms.
+- CTF has been removed for now.
+- Minor grammar/spelling/content fixes to various messages.
+- Fixed a bug where, under certain circumstances, the first character
+of a player's message was being cut off when transmitted to the IRC
+channel, and unintended coloring was being applied as well. A similar
+issue with Console's chat was also fixed.
+- Fixed /portal show and /mb show.
+- Fixed an exploit with /seen and /clones.
+- Fixed a bug where some messages with % were incorrectly assessed
+as invalid.
+- Fixed auto-afk.
+- Fixed /changelog not working under Linux.
+- Certain characters, such as #, can be typed on their own now if
+preceded with a backslash.
+- Changed the output of /devs and /info.
+- Data related to portals and message boxes are now backed up with
+each backup (except backups of deleted levels).
+- Removed some easter egg commands, and removed a usage limit on
+some other easter egg commands so that kcapilit can troll more :p
+- Other things that I forgot.
+
+r2 (2012-04-25):
+- Removed /pcinema, /pcinema2 and /scinema.
+- Removed /banlist (it was painfully slow with large banlists).
+- Removed /overseer.
+- Removed /uban.
+- Removed /copyloadnet and /copysavenet.
+- Changed default rank of the following commands:
+    - /delete is now builder (was: adv)
+    - /zz is now adv (was: builder)
+    - /opchat is now op (was: adv)
+- Removed tempranks.
+- Removed /chain.
+- Removed translation.
+- Removed /imageprint.
+- Removed most games except CTF. These include lava survival, zombie
+survival, countdown, infection, and TNT wars.
+- Some commands are categorized differently in /help.
+- Fixed bugs that prevented some commands from being visible in /help.
+- Removed the "/help games" category.
+- Some typos fixed.
+- Removed the ability for message blocks to trigger commands.
+- Fixed mbs and titles with apostrophes not saving properly when using
+SQLite.
+
+r1 (2012-04-14):
+- Removed /giftocin.
+- Removed the global chat system.
+- Removed /killphysics.
+- Removed omnibans.
+- MCHmk servers will no longer be listed on MCForge's website.
+- Removed dev and global chat mod immunity from various commands.
+- Replaced the incomplete /levels command with a completed one from a
+previous version of MCForge.
+- Removed /nyan and /pumpkin.
+- SQLite3 now reads from MCHmk.db. Rename your database to MCHmk.db
+so that MCHmk can read it. There will be an option to specify the file
+name in a future update.
+- Changed the default server name.
+- Added Viewmode.cfg to the .zip file. It defaults to the CLI interface.
+- Removed the Updater.
+- Removed the ability to use a MCForge forum account.
+- Changed something about the admin verification system; new passwords 
+need to be generated now! Delete all .xml files in /extra/passwords/ 
+and have every admin use /setpass again.
+- Plugin support was probably broken.
+- Other minor, unimportant changes.
+Note: the GUI is not being maintained and may break at any time.
+
+r0 (2012-04-09):
+- Exactly the same as the MCForge 5.5.0.2 source code.

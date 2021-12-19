@@ -1,0 +1,21 @@
+# Visual Studio files
+*/bin
+*/obj
+*.suo
+*.user
+*.[Cc]ache
+*.bak
+
+# OS garbage
+[Tt]humbs.db
+*.DS_STORE
+*.lnk
+
+# MonoDevelop
+*.userprefs
+*.vs
+
+# Generated documentation
+doc/
+doxy_warn.log
+
